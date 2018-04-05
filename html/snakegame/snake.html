@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .container{
+            background-color: #ccc;
+            width: 1200px;
+            height: 600px;
+            margin: auto;
+            position: relative;
+        }
+        .div{
+            width: 50px;
+            height: 30px;
+            background: skyblue;
+            position: absolute;
+            /*top: 500px;*/
+        }
+        .first{
+            border-radius: 25px 0px 0px 25px;
+            background-color: #0cf;
+            left: 500px;
+        }
+        .body1{
+            left: 550px;
+        }
+        .body2{
+            left: 600px;
+        }
+        .body3{
+            left: 650px;
+        }
+        .body4{
+            left: 700px;
+        }
+        .last{
+            left: 750px;
+            border-radius: 0px 25px 25px 0px;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div id="div1" class="div first"></div>
+            <div id="div2" class="div body1"></div>
+            <div id="div3" class="div body2"></div>
+            <div id="div4" class="div body3"></div>
+            <div id="div5" class="div body4"></div>
+            <div id="div6" class="div last"></div>
+        </div>
+    </body>
+    <script>
+        var div = document.getElementsByClassName("div");
+        var div1 = document.getElementById("div1");
+        var div6 = document.getElementById("div6");
+
+        var left_init = 500;
+        var top_init = 500;
+
+        window.onload = function(){
+            for(var i = 0; i < div.length; i++){
+                div[i].style.left = left_init + "px";
+                left_init += 50;
+                div[i].style.top = top_init + "px";
+            }
+        }
+
+        window.onkeydown = function(event){
+            change_move(event);
+        }
+
+        function change_move(event){
+            if(event.keyCode == 37){
+                move_left();
+            }else if(event.keyCode == 38){
+                move_top();
+                div1.style.borderRadius = "25px 25px 0px 0px";
+            }else if(event.keyCode == 39){
+                move_right();
+            }else if(event.keyCode == 40){
+                move_bottom();
+            }
+        }
+
+        function move_left(){
+            //获取蛇头的位置
+            var left = parseInt(div1.style.left.replace("px", ""));
+            var top = parseInt(div1.style.top.replace("px", ""));
+            //获取蛇尾的位置
+            var last_left = parseInt(div6.style.left.replace("px", ""));
+            var last_top = parseInt(div6.style.top.replace("px", ""));
+
+            left -= 50;
+            div1.style.left = left + "px";
+            div1.style.borderRadius = "25px 0px 0px 25px";
+            for(var i = 1; i < div.length; i++){
+                var div_left = Number(div[i].style.left.replace("px", ""));
+                var div_top = parseInt(div[i].style.top.replace("px", ""));
+                if(i < 4){
+                    var next_left =  Number(div[i + 1].style.left.replace("px", ""));
+                    var next_top =  Number(div[i + 1].style.top.replace("px", ""));
+                }
+                if(div_top != top){
+                    if(top <= last_top){
+                        div[i].style.top = (div_top - 30) + "px";
+                    }
+                    else if(top > last_top){
+                        div[i].style.top = div_top + 30 +"px";
+                    }
+
+                }else{
+                    if(left <= last_left){
+                        div[i].style.left = (div_left - 50) + "px";
+                    }else{
+                        div[i].style.left = (div_left + 50) + "px";
+                    }
+                    if(i == 4){
+                        div[5].style.borderRadius = "0px 25px 25px 0px";
+                    }
+                }
+            }
+
+            // setTimeout("move_left()", 1000);
+        }
+         function move_top(){
+            //获取蛇头的位置
+            var top = Number(div1.style.top.replace("px", ""));
+            var left = Number(div1.style.left.replace("px", ""));
+            //获取蛇尾的位置
+            var last_left = parseInt(div6.style.left.replace("px", ""));
+            var last_top = parseInt(div6.style.top.replace("px", ""));
+
+            top -= 30;
+            div1.style.top = top + "px";
+            for(var i = 1; i < div.length; i++){
+                var div_left = parseInt(div[i].style.left.replace("px", ""));
+                var div_top = parseInt(div[i].style.top.replace("px", ""));
+
+                if(div_left != left){
+                    if(left <= last_left){
+                        div[i].style.left = (div_left - 50) + "px";
+                    }else{
+                        div[i].style.left = (div_left + 50) + "px";
+                    }
+                }else{
+                    if(top <= last_top){
+                        div[i].style.top = (div_top - 30) +"px";
+                    }else if(top > last_top){
+                        div[i].style.top = (div_top + 30) +"px";
+                    }
+                    if(i == 4){
+                        div[5].style.borderRadius = "0px 0px 25px 25px";
+                    }
+                }
+            }
+            // setTimeout("move_top()", 1000);
+        }
+         function move_right(){
+            //获得蛇头的位置
+            var left = Number(div1.style.left.replace("px", ""));
+            var top = parseInt(div1.style.top.replace("px", ""));
+            //获取蛇尾的位置
+            var last_left = parseInt(div6.style.left.replace("px", ""));
+            var last_top = parseInt(div6.style.top.replace("px", ""));
+            left += 50;
+            div1.style.left = left + "px";
+            div1.style.borderRadius = "0px 25px 25px 0px";
+            for(var i = 1; i < div.length; i++){
+                var div_left = parseInt(div[i].style.left.replace("px", ""));
+                var div_top = parseInt(div[i].style.top.replace("px", ""));
+               if(div_top != top){
+                    if(top < last_top){
+                        div[i].style.top = (div_top - 30) + "px";
+                    }
+                    else if(top > last_top){
+                        div[i].style.top = div_top + 30 +"px";
+                    }
+                }else{
+                    if(left < last_left){
+                        div[i].style.left = (div_left - 50) + "px";
+                    }else{
+                        div[i].style.left = (div_left + 50) + "px";
+                    }
+                    if(i == 4){
+                        div[5].style.borderRadius = "25px 0px 0px 25px";
+                    }
+                }
+            }
+            // setTimeout("move_right()", 1000);
+        }
+         function move_bottom(){
+            //获取蛇头的位置
+            var top = Number(div1.style.top.replace("px", ""));
+            var left = Number(div1.style.left.replace("px", ""));
+            //获取蛇尾的位置
+            var last_left = parseInt(div6.style.left.replace("px", ""));
+            var last_top = parseInt(div6.style.top.replace("px", ""));
+            top += 30;
+            div1.style.top = top + "px";
+            div1.style.borderRadius = "0px 0px 25px 25px";
+            for(var i = 1; i < div.length; i++){
+                var div_left = parseInt(div[i].style.left.replace("px", ""));
+                var div_top = parseInt(div[i].style.top.replace("px", ""));
+                if(div_left != left){
+                    if(left <= last_left){
+                        div[i].style.left = (div_left - 50) + "px";
+                    }else{
+                        div[i].style.left = (div_left + 50) + "px";
+                    }
+                }else{
+                    if(top <= last_top){
+                        div[i].style.top = (div_top - 30) +"px";
+                    }else if(top > last_top){
+                        div[i].style.top = (div_top + 30) +"px";
+                    }
+                    if(i == 4){
+                        div[5].style.borderRadius = "25px 25px 0px 0px";
+                    }
+                }
+            }
+
+            // setTimeout("move_bottom()", 1000);
+        }
+
+    </script>
+</html>

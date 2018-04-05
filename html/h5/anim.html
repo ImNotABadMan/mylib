@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style>
+        .div{
+            /*width: 200px;
+            height: 200px;*/
+            /*border-radius: 50%;*/
+            /*background-color: #0155e5;*/
+            /*margin: 50px auto;*/
+            position: absolute;
+            transition-duration:5s;
+        }
+        body{
+            transition-duration: 5s;
+            overflow: hidden;
+        }
+    </style>
+    <body>
+        <div class="div" id="div"></div>
+    </body>
+    <script>
+        var div = document.getElementById("div");
+        //循环动画
+        function run(obj){
+            var hw = Math.random() * 150 + 50;
+            obj.style.width = Math.random() * 150 + 50 + "px";
+            obj.style.height = Math.random() * 150 + 50 + "px";
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            rgb = "rgb(" + r + "," + g + "," + b + ")";
+            obj.style.backgroundColor = rgb;
+            // obj.style.borderRadius = Math.random() * 50 + "%";
+            obj.style.borderTopLeftRadius = Math.random() * 50 + "%";
+            obj.style.borderTopRightRadiusRight = Math.random() * 50 + "%";
+            obj.style.borderBottomRightRadiusRight = Math.random() * 50 + "%";
+            obj.style.borderBottomRightRadiusRight = Math.random() * 50 + "%";
+
+            var change = "";
+            //动画效果随机
+            switch(Math.ceil(Math.random() * 3)){
+                case 1:
+                    change = change + "rotateX(" + Math.floor(Math.random() * 180) + "deg) rotateY(" + Math.floor(Math.random() * 180) + "deg) rotateZ(" + Math.floor(Math.random() * 180) + "deg) ";
+                    break;
+                case 2:
+                    change = change + "translateX(" + Math.floor(Math.random() * 400 - 200) + "px) translateY(" + Math.floor(Math.random() * 400 - 200) + "px)";
+                    break;
+                case 3:
+                    change = change + "rotateX(" + Math.floor(Math.random() * 180) + "deg) rotateY(" + Math.floor(Math.random() * 180) + "deg) rotateZ(" + Math.floor(Math.random() * 180) + "deg) ";
+                    change = change + "translateX(" + Math.floor(Math.random() * 400 - 200) + "px) translateY(" + Math.floor(Math.random() * 400 - 200) + "px)";
+                    break;
+            }
+            obj.style.transform = change;
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            rgb = "rgb(" + r + "," + g + "," + b + ")";
+            document.body.style.backgroundColor = rgb;
+            setTimeout(run, 5000, obj);
+        }
+        //在全局中创建div
+        for(var i = 0; i < 26; i++){
+            var d = document.createElement("div");
+            var top = Math.random() * 500 - 500 + "px";
+            var left = Math.random() * 500 - 500 + "px";
+            d.style.position = "absolute";
+            d.style.top = top;
+            d.style.left = left;
+            d.style.borderRadius = Math.random() * 100 + "%";
+            d.style.transitionDuration = "5s";
+            d.style.backgroundImage = "url(../images/bk" + Math.ceil(Math.random() * 4) + ".jpg)";
+            document.body.appendChild(d);
+        }
+        var allDiv = document.getElementsByTagName("div");
+        window.onload = function(){
+            // run(div);
+            //在window.onload事件中再一次对top和left进行调整
+            var div_len = allDiv.length;
+            for(var i = 0; i < div_len; i++){
+                allDiv[i].style.top = Math.random() * 500 + "px";
+                allDiv[i].style.left = Math.random() * 1200 + "px";
+                allDiv[i].style.borderRadius = Math.random() * 50 + "%";
+                run(allDiv[i]);
+            }
+        }
+    </script>
+</html>

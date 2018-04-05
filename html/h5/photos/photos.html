@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>照片堆</title>
+		<style>
+			body{
+				background-image: url(img/201311220560622.jpg);
+			}
+			div{
+				float: left;
+				position: fixed;
+				border-radius: 10px;
+				box-shadow: 1px 1px 10px black;
+				padding: 20px;
+				background-color: white;
+				margin: 200px 500px;
+				transition-duration: 0.5s;
+				transition-property: transform;
+			}
+
+			/*.div1:hover{
+				transform: translateX(100px) rotateZ(10deg) ;
+			}
+			.div2:hover{
+				transform: translateX(-100px) rotateZ(10deg) ;
+			}
+			.div3:hover{
+				transform: translateY(100px) rotateZ(10deg) ;
+			}
+			.div4:hover{
+				transform: translateY(-100px) rotateZ(10deg) ;
+			}*/
+			
+			/*.div5:hover{
+				transform: translateY(-100px) rotateZ(10deg) ;
+			}
+			*/
+			img{
+				width: 200px;
+				border-radius: 10px;;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>
+			<div class="div1">
+				<img src="img/smile.jpg" alt="1" />
+			</div>
+			<div class="div2">
+				<img src="img/smile.jpg" alt="2" />
+			</div>
+			<div class="div3">
+				<img src="img/smile_0.jpg" alt="3" />
+			</div>
+			<div class="div4">
+				<img src="img/smile_1.jpg" alt="4" />
+			</div>
+			<div class="div5">
+				<img src="img/smile_2.png" alt="5" />
+			</div>
+		</h3>
+	</body>
+	<script type="text/javascript" src="js/photos.js"></script>
+</html>

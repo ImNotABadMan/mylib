@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+        <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .container{
+            background-color: #ccc;
+            width: 1000px;
+            height: 500px;
+            margin: auto;
+            position: relative;
+        }
+        .div{
+            width: 50px;
+            height: 50px;
+            background: skyblue;
+            position: absolute;
+            transition-duration: 0.2s;
+            /*top: 500px;*/
+        }
+        .first{
+            border-radius: 25px 0px 0px 25px;
+            background-color: #0cf;
+            /*left: 500px;*/
+        }
+        /*.body1{
+            left: 550px;
+        }
+        .body2{
+            left: 600px;
+        }
+        .body3{
+            left: 650px;
+        }
+        .body4{
+            left: 700px;
+        }*/
+        .last{
+            /*left: 750px;*/
+            border-radius: 0px 25px 25px 0px;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <div class="div first" id="div1"></div>
+            <div class="div body1" id="div2"></div>
+            <div class="div body2" id="div3"></div>
+            <div class="div body3" id="div4"></div>
+            <div class="div body4" id="div5"></div>
+            <div class="div last" id="div6"></div>
+        </div>
+    </body>
+        <script>
+            var div = document.getElementsByClassName("div");
+            var div1 = document.getElementById("div1");
+            var div6 = document.getElementById("div6");
+
+            var left_init = 200;
+            var top_init = 200;
+
+            var left,top1;
+            var temp_left;
+            var temp_top;
+            //存储头部要移动之之前的位置
+            var left_first, top_first;
+
+            window.onload = function(){
+                for(var i = 0; i < div.length; i++){
+                    div[i].style.left = left_init + "px";
+                    left_init += 50;
+                    div[i].style.top = top_init + "px";
+                }
+                left = parseInt(div1.style.left.replace("px", ""));
+                top1 = parseInt(div1.style.top.replace("px", ""));
+                temp_left = left;
+                temp_top = top1;
+            }
+
+            window.onkeydown = function(event){
+                left = parseInt(div1.style.left.replace("px", ""));
+                top1 = parseInt(div1.style.top.replace("px", ""));
+                change_move(event);
+            }
+
+            function change_move(event){
+                var flag = true;
+                var left_0 = parseInt(div[0].style.left.replace("px", ""));
+                var top_0 = parseInt(div[0].style.top.replace("px", ""));
+                var left_1 = parseInt(div[1].style.left.replace("px", ""));
+                var top_1 = parseInt(div[1].style.top.replace("px", ""));
+
+                var left_5 = parseInt(div[div.length - 1].style.left.replace("px", ""));
+                var top_5 = parseInt(div[div.length - 1].style.top.replace("px", ""));
+                var s = parseInt(div[4].style.left);
+                switch(event.keyCode){
+                    case 37:
+                        for(var i = 4; i < div.length; i++){
+                            flag = true;
+                            if(left_0 - parseInt(div[i].style.left) == 50 && top_0 - parseInt(div[i].style.top) <= -50){
+                                flag = false;
+                            }
+                        }
+                        if(!(top_0 == top_1 && left_0 > left_1) && flag){
+                            div1.style.left = left - 50 + "px";
+                            div1.style.borderRadius = "25px 0px 0px 25px";
+                            move(left, top);
+                        }
+                        break;
+                    case 38:
+                        for(var i = 4; i < div.length; i++){
+                            flag = true;
+                            if(Math.abs(left_0 - parseInt(div[i].style.left)) >= 50 && top_0 - parseInt(div[i].style.top)== 50){
+                                flag = false;
+                            }
+                        }
+                        if(!(left_0 == left_1 && top_0 > top_1) && flag){
+                            div1.style.top = top1 - 50 + "px";
+                            div1.style.borderRadius = "25px 25px 0px 0px";
+                            move(left, top);
+                        }
+                        break;
+                    case 39:
+                        for(var i = 4; i < div.length; i++){
+                            flag = true;
+                            if(left_0 - parseInt(div[i].style.left) == -50 && top_0 - parseInt(div[i].style.top) <= -50){
+                                flag = false;
+                            }
+                        }
+                        if(!(top_0 == top_1 && left_0 < left_1) && flag){
+                            div1.style.left = left + 50 + "px";
+                            div1.style.borderRadius = "0px 25px 25px 0px";
+                            move(left, top);
+                        }
+                        break;
+                    case 40:
+                        for(var i = 4; i < div.length; i++){
+                            flag = true;
+                            if(Math.abs(left_0 - parseInt(div[i].style.left)) >= 50 && top_0 - parseInt(div[i].style.top) == -50){
+                                flag = false;
+                            }
+                        }
+                        if(!(left_0 == left_1 && top_0 < top_1) && flag){
+                            div1.style.top = top1 + 50 + "px";
+                            div1.style.borderRadius = "0px 0px 25px 25px";
+                            move(left, top);
+                        }
+                        break;
+                }
+            }
+
+            function move(left, top){
+                for(var i = 1; i < div.length; i++){
+                    // var pre_left = parseInt(div[i-1].style.left.replace("px", ""));
+                    // var pre_top = parseInt(div[i-1].style.top.replace("px", ""));
+
+                    var next_left = parseInt(div[i].style.left.replace("px", ""));
+                    var next_top = parseInt(div[i].style.top.replace("px", ""));
+
+                    div[i].style.left = temp_left +"px";
+                    div[i].style.top = temp_top + "px";
+
+                    temp_left = next_left;
+                    temp_top = next_top;
+                }
+                var left4 = parseInt(div[div.length - 2].style.left.replace("px", ""));
+                var top4 = parseInt(div[div.length - 2].style.top.replace("px", ""));
+                var left5 = parseInt(div[div.length - 1].style.left.replace("px", ""));
+                var top5 = parseInt(div[div.length - 1].style.top.replace("px", ""));
+
+                if(left4 > left5){
+                    div[div.length - 1].style.borderRadius = "25px 0px 0px 25px";
+                }else if(left4 < left5){
+                    div[div.length - 1].style.borderRadius = "0px 25px 25px 0px";
+                }else if(top4 > top5){
+                    div[div.length - 1].style.borderRadius = "25px 25px 0px 0px";
+                }else if(top4 < top5){
+                    div[div.length - 1].style.borderRadius = "0px 0px 25px 25px";
+                }
+
+
+                //让temp_left,temp_top变成移动后头部的职位
+                temp_left = parseInt(div1.style.left.replace("px", ""));
+                temp_top = parseInt(div1.style.top.replace("px", ""));
+            }
+        </script>
+</html>

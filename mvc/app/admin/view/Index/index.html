@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Index</title>
+</head>
+<body>
+    {$smartyStr}
+    <div>
+        <p>id : {$row.id}</p>
+        <p>title : {$row.title}</p>
+        <p>u_nickname : {$row.u_nickname}</p>
+        <p>c_name : {$row.c_name}</p>
+        <p>intro : {$row.intro}</p>
+        <p>content : {htmlspecialchars_decode($row.content)}</p>
+    </div>
+</body>
+</html>

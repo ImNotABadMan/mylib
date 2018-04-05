@@ -1,0 +1,1 @@
+[14-Dec-2017 08:24:41 PRC] PHP Fatal error:  Call to undefined method model\IndexModel::getRo() in D:\Apache2.2\htdocs\lib\mvc\app\admin\controller\IndexController.class.php on line 14

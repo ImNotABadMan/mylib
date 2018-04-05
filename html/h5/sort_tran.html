@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style>
+        .num{
+            width: 20px;
+            /*height: 500px;*/
+            float: left;
+            background-color: #1266c2;
+            border: 1px solid #ccc;
+            position: absolute;
+            transition-duration: 2s;
+        }
+    </style>
+    <script>
+        var arr_obj = [
+            [450,50,0],[400,100,20],[500,0,40],[300,200,60],[100,400,80],
+            [50,450,100],[250,250,120],[480,20,140],[420,80,160],[350,150,180]
+            ];
+        // console.log(arr_sort);
+    </script>
+    <body>
+        <div class="num num0"></div>
+        <div class="num num1"></div>
+        <div class="num num2"></div>
+        <div class="num num3"></div>
+        <div class="num num4"></div>
+        <div class="num num5"></div>
+        <div class="num num6"></div>
+        <div class="num num7"></div>
+        <div class="num num8"></div>
+        <div class="num num9"></div>
+        <div style="height: 50px;clear:both;"><input type="button" onclick="sort(arr_sort)" value="排序" /></div>
+    </body>
+    <script>
+        var arr_sort = [];
+        var len = Math.random() * 60 + 10;
+        for(var i = 0; i < len; i++){
+            var num = Math.random()*500 + 1;
+            arr_sort.push(num);
+            arr_obj.push([num,i*20]);
+            var div = document.createElement("div");
+            div.className = "num num" + i;
+            div.style.left = i * 20 + "px";
+            div.style.height = num + "px";
+            div.style.top = 500 - num + "px";
+            document.body.appendChild(div);
+        }
+
+        var div_obj = document.getElementsByClassName('num');
+        for(var i = 0; i < div_obj.length; i++){
+            console.log(div_obj[i].className);
+        }
+        function sort(arr){
+            var arr_len = arr.length;
+            // console.log(arr_len);
+            for(var i = 0; i < arr_len - 1; i++){
+                min = arr[i];
+                min_key = i;
+                for(var j = i + 1; j < arr_len; j++){
+                    if(min > arr[j]){
+                        min = arr[j];
+                        min_key = j;
+                    }
+                }
+                arr[min_key] = arr[i];
+                arr[i] = min;
+
+                // var tmp = arr_obj[min_key][2];
+                // var temp = arr_obj[min_key][0];
+                // arr_obj[min_key][2] = arr_obj[i][2];
+                // // arr_obj[min_key][0] = arr_obj[i][0];
+                // arr_obj[i][2] = tmp;
+                // // arr_obj[i][0] = temp;
+                // //左右互换
+                // div_obj[min_key].style.left = arr_obj[min_key][2] + "px";
+                // div_obj[min_key].style.top = 500 - arr_obj[min_key][0] + "px";
+                // div_obj[min_key].style.height = arr_obj[min_key][0] + "px";
+
+                // div_obj[i].style.left = arr_obj[i][2] + "px";
+                // div_obj[i].style.height = arr_obj[i][0] + "px";
+                // div_obj[i].style.top = 500 - arr_obj[i][0] + "px";
+
+
+                // console.log(div_obj[min_key].style.left + "----" + div_obj[i].style.left);
+                // console.log(arr_obj[min_key] + "*******" + arr_obj[i]);
+
+
+
+
+                // setTimeout(function(){
+                //     var date = new Date().getTime();
+                //     while(true){
+                //         if(new Date().getTime() - date > 500){
+                //             break;
+                //         }
+                //     }
+                // }, 0);
+            }
+            //左右变换，慢
+            for(var k = 0; k < arr.length; k++){
+                for(var i = 0; i < arr_obj.length; i++){
+                     console.log(arr_obj[i][2]);
+                     if(arr_obj[i][0] == arr[k]){
+                        arr_obj[i][2] = k*20;
+                        div_obj[i].style.left = arr_obj[i][2] + "px";
+                     }
+                 }
+             }
+            // for(var i =0; i < arr_obj.length; i++){
+                 console.log(arr);
+             // }
+            return arr;
+        }
+
+    </script>
+</html>

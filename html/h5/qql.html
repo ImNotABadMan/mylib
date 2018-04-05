@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+        <style>
+            .div{
+                width: 200px;
+                height: 200px;
+                border-radius: 5% 0% 50% 0%;
+                background-color: #e95552;
+                animation-name: run;
+                animation-duration: 2s;
+                animation-timing-function: linear;
+                animation-fill-mode: forwards;
+                margin: -200px -100px;
+                /*border-left: 5px solid #000;*/
+                /*border-right: 5px solid #000;*/
+            }
+
+            @-webkit-keyframes run{
+                from{transform: rotateX(-90deg) rotateY(0deg) rotateZ(50deg) scale(5);}
+                to{transform:scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg)  translateX(600px) translateY(400px) ;}
+            }
+        </style>
+    <body>
+        <div class="div"></div>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">添加学生</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">{$subVal}</h4>
+      </div>
+      <div class="modal-body">
+        <!-- id  | name | sex | age | learn  | salary | extramoney | nativeplace -->
+        <!-- <div class="h4">{$subVal}</div> -->
+        <form action="list.php?page={$page}&flag={$var1}" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="name" class="control-label col-xs-2">Name:</label>
+                <div class="col-xs-6">
+                    <input id="name" type="text" name="name" class="form-control" value="{$upData.name|default:''}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sex" class="control-label col-xs-2">Sex:</label>
+                <div class="col-xs-6">
+                    <input id="sex" type="text" name="sex" class="form-control" value="{$upData.sex|default:''}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="age" class="control-label col-xs-2">Age:</label>
+                <div class="col-xs-6">
+                    <input id="age" type="number" name="age" class="form-control" value="{$upData.age|default:0}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="learn" class="control-label col-xs-2">Learn:</label>
+                <div class="col-xs-6">
+                    <input id="learn" type="text" name="learn" class="form-control" value="{$upData.learn|default:''}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="salary" class="control-label col-xs-2">Salary:</label>
+                <div class="col-xs-6">
+                    <input id="salary" type="number" name="salary" class="form-control" value="{$upData.salary|default:0}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="extramoney" class="control-label col-xs-2">Extramoney:</label>
+                <div class="col-xs-6">
+                    <input id="extramoney" type="number" name="extramoney" class="form-control"  value="{$upData.extramoney|default:0}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="nativeplace" class="control-label col-xs-2">Nativeplace:</label>
+                <div class="col-xs-6">
+                    <input id="nativeplace" type="text" name="nativeplace" class="form-control" value="{$upData.nativeplace|default:''}" />
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="{$subVal}" />
+            </div> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button id="btn" type="button" class="btn btn-primary">新增</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+     var btn = document.getElementById("btn");
+     btn.onclick = function(){
+        location.href = "list.php?page={$page}&flag={$var1}";
+     }
+</script>

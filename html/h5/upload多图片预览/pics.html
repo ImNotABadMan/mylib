@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script language="JavaScript" src="./jquery.js"></script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <style>
+    .add-btn{
+        vertical-align: top;
+        cursor: pointer;
+    }
+    .forminfo li{
+        float: left;
+        /*width: 500px;*/
+        clear: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="formbody">
+        <div class="formtitle">
+            <span class="active">添加相册</span>
+        </div>
+        <form action="#" method="post" enctype='multipart/form-data'>
+            <ul class="forminfo">
+                <li>
+                    <img src="./t01.png" alt="" class='add-btn' />
+                    <input id='f' name="goods_logo_src" type="file" class="" onchange="change()"  /><i></i>
+                    <p>
+                        <img id="preview" style='max-height: 200px;max-width: 200px;'  name="pic" /> <!-- 图片预览在这里展示 -->
+                    </p>
+                </li>
+                <li style='clear: both;'>
+                    <label>&nbsp;</label>
+                    <input name="" id="btnSubmit" type="submit" class="btn" value="确认保存" />
+                 </li>
+             </ul>
+        </form>
+    </div>
+</body>
+<script src="./placeImage.js"></script>
+<script>
+    var index = 0;
+    $('.add-btn').click(function(){
+        var li = $(this).parent().clone();
+        index++;
+        $(this).parent().after(li)
+                        .next().children('.add-btn')
+                        .attr('src', './t03.png')
+                        .click(function(){
+                            $(this).parent().remove();
+                        }).next().val('').attr('id', 'f' + index)
+                        .change(function(){
+                            change(this.nextElementSibling.nextElementSibling.getElementsByTagName('img')[0], this);
+                        }).next().next().children('img')
+                        .attr('id', 'preview' + index).attr('src', '');
+    });
+</script>
+
+</html>

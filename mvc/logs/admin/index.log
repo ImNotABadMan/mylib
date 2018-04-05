@@ -1,0 +1,15 @@
+--------------------2017-12-14 08:22:04--------------------
+错误信息：SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cate.cates_blog' doesn't exist
+错误文件：D:\Apache2.2\htdocs\lib\mvc\core\Model.class.php
+错误行号：54
+
+--------------------2017-12-14 08:23:22--------------------
+错误信息：SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cate.cates_blog' doesn't exist
+错误文件：D:\Apache2.2\htdocs\lib\mvc\core\Model.class.php
+错误行号：54
+
+--------------------2017-12-14 08:30:38--------------------
+错误信息：SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cate.cates_blog' doesn't exist
+错误文件：D:\Apache2.2\htdocs\lib\mvc\core\Model.class.php
+错误行号：54
+

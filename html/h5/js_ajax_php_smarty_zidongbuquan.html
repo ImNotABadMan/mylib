@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="./myAjaxTool.js"></script>
+</head>
+<body>
+    <input type="text" id="input" />
+    <ul id="menu"></ul>
+</body>
+<script>
+var input = document.getElementById("input");
+myAjax.getUser(input, "menu", "GET", "http://www.bin.com/pro1/index.php?p=admin&m=blog&a=getUser&date=" + new Date().getTime() + "&u_nickname=");
+</script>
+</html>

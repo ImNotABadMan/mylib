@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style>
+    .btn{
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #1266c2;
+        outline: none;
+        border: 0px;
+    }
+    .num{
+        width: 79px;
+        /*height: 500px;*/
+        float: left;
+        background-color: #1266c2;
+        border: 1px solid #ccc;
+        position: absolute;
+        transition-duration: 2s;
+        color: #fff;
+        font-size: 26px;
+    }
+    .img{
+        height: 50px;
+        vertical-align:top;
+        border-radius: 10px;
+        animation-name: roll;
+        animation-duration: 2s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+    }
+    @keyframes roll{
+        from{transform: translateX(-20px);}
+        to{transform: translateX(0px);}
+    }
+    </style>
+    <body style='height: 500px;width: 1150px'>
+    <div style="height: 50px;margin-left: 700px;"><span><img src="./1.jpg" alt="" class='img' /></span><input type="button" class='btn' id='btn' value="ヾ(≧▽≦*)o快戳我，看我怎样！！" /></div>
+
+    <!-- <center style='width: 800px;margin:auto;'>
+        <div class="num num0"></div>
+        <div class="num num1"></div>
+        <div class="num num2"></div>
+        <div class="num num3"></div>
+        <div class="num num4"></div>
+        <div class="num num5"></div>
+        <div class="num num6"></div>
+        <div class="num num7"></div>
+        <div class="num num8"></div>
+        <div class="num num9"></div>
+    </center> -->
+    <div id="sort"></div>
+    </body>
+    <script>
+        //随机高度，，距离左边
+        // var arr_obj = [
+        //     [450,50,0],[400,100,20],[500,0,40],[300,200,60],[100,400,80],
+        //     [50,450,100],[250,250,120],[480,20,140],[420,80,160],[350,150,180]
+        // ];
+        var arr_obj = [];
+        //存储排序的数组
+        var arr_sort = [];
+        var font_sort = [];
+        //11
+        var font = [
+            ['你','现','在','还','会','不','会','累','啊','😝'],
+            ['我','现在','在','打','点','有','意思','的','代','码'],
+            ['你','是','否','还在','卤死','我那','小脾气','啊','🐷','😝'],
+            ['不要','想','太多','了','好不','好','嘛','~-~','啊','🙌'],
+            ['我','变成','卤','猪脚','给你','吃','要', '不要', '😍','啊'],
+            ['來','一','波','🍭','🍦','🍧','🍨', '夠', '不','夠'],
+            ['不','够','再','来','一','波','🍿', '🍢', '🍭','🍮'],
+            ['一','波','过','后','还','有','三', '波', '💖','💗'],
+            ['这','三','波','等','我','回','家', '在', '给','你'],
+            ['我','要','把','你','养','胖','了', '🌮', '🥘','🍲'],
+            ['然','后','再','让','你','减','肥', '哈', '哈','🤣'],
+            ['然','后','我','就','吃','给','你', '看', '哈','哈', '🤣', '🤣']
+        ];
+        //初始化localStorage
+        if(localStorage.num == undefined){
+            localStorage.num = 0;
+        }
+
+        // var len = Math.random() * 60 + 10;
+        // console.log(font);
+        var len = font[localStorage.num].length;
+        var flag = true;
+        for(var i = 0; i < len; i++){
+            var num = Math.random()*400 + 20;
+            //随机数加入将要排序的数组
+            arr_sort.push(num);
+            font_sort.push(num);
+            arr_obj.push([num,i*20]);
+            var div = document.createElement("div");
+            div.className = "num num" + i;
+            div.style.left = i * 80 + "px";
+            div.style.height = num + "px";
+            div.style.top = 500 - num + "px";
+
+            document.getElementById("sort").appendChild(div);
+        }
+
+        //对字排序，对随机数组进行排序
+        for(var i = 0; i < arr_sort.length - 1; i++){
+            min = arr_sort[i];
+            min_key = i;
+            for(var j = i + 1; j < arr_sort.length; j++){
+                if(min > arr_sort[j]){
+                    min = arr_sort[j];
+                    min_key = j;
+                }
+            }
+            arr_sort[min_key] = arr_sort[i];
+            arr_sort[i] = min;
+        }
+        //获得div
+        var div_obj = document.getElementsByClassName('num');
+
+        //按照排序好的数组，把字符一个一个对应到打乱之前的位置上
+        for(var k = 0; k < arr_sort.length; k++){
+            for(var i = 0; i < arr_sort.length; i++){
+                 // console.log(arr_obj[i][2]);
+                 if(arr_obj[i][0] == arr_sort[k]){
+                    //将排序后的数组与随机生成的数组对比，第一个数组相等则换位置
+                    div_obj[i].innerHTML = font[localStorage.num][k];
+                 }
+             }
+         }
+
+        console.log(arr_sort, arr_obj);
+
+        function sort(arr){
+            if(!flag){
+                return false;
+            }
+
+            //左右变换，慢
+            for(var k = 0; k < arr.length; k++){
+                for(var i = 0; i < arr_obj.length; i++){
+                     // console.log(arr_obj[i][2]);
+                    if(arr_obj[i][0] == arr[k]){
+                        //将排序后的数组与随机生成的数组对比，第一个数组相等则换位置
+                        arr_obj[i][2] = k*80;
+                        div_obj[i].style.left = arr_obj[i][2] + "px";
+                    }
+                 }
+            }
+
+            //每次点击之后改变localStorage，让它对应的文字段下标改变
+            localStorage.num = parseInt(localStorage.num) + 1;
+
+            if(localStorage.num == font.length){
+                localStorage.num = 0;
+            }
+            flag = false;
+            return arr;
+        }
+         document.getElementById('btn').onclick= function(){
+            sort(arr_sort);
+            this.value = 'ヾ(≧▽≦*)o继续戳，驚喜多多！！';
+            this.onclick = function(e){
+                location.href= './fileinthehor.html?_=' + Math.random();
+
+            }
+        }
+    </script>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #box{
+               /* width: 500px;
+                height: 500px;*/
+                background-color: #005eaf;
+                /*line-height: 600px;*/
+                /*text-align: center;*/
+                color: white;
+                margin: auto;
+                border-radius: 50%;
+                position: relative;
+                z-index: 0;
+            }
+            .b{
+                position: absolute;
+                /*display: block;*/
+               /* width: 50px;
+                height: 50px;*/
+                font-size: 50px;
+                z-index: 1;
+            }
+            .seconds{
+                width: 10px;
+                height: 360px;
+                background-color: white;
+                position: absolute;
+                top: 80px;
+                z-index: 1;
+                animation-timing-function: linear;
+                animation-duration: 60s;
+                animation-name: rot;
+                animation-iteration-count: infinite;
+
+            }
+             @-webkit-keyframes rot{
+                from{transform: rotateZ(0);}
+                to{transform: rotateZ(360deg);};
+            }
+            .in2{
+                width: 100%;
+                height: 180px;
+                background-color: #005eaf;
+            }
+            .in1{
+                width: 100%;
+                height: 180px;
+                background-color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="box">
+            <b class="b1 b">12</b>
+            <b class="b2 b">3</b>
+            <b class="b3 b">6</b>
+            <b class="b4 b">9</b>
+            <div class="seconds">
+                <div class="in1"></div>
+                <div class="in2"></div>
+            </div>
+        </div>
+    </body>
+    <script>
+        var b = document.getElementsByClassName("b");
+        var box = document.getElementById("box");
+        var s = document.getElementsByClassName("seconds")[0];
+
+        box.style.width = "500px";
+        box.style.height = "500px";
+        for(var i = 0; i < b.length; i++){
+            b[i].style.width = "50px";
+            b[i].style.height = "50px";
+        }
+        var boxW = parseInt(box.style.width);
+        var boxH = parseInt(box.style.height);
+        b[0].style.left = boxW/2 - parseInt(b[0].style.width)/2 + "px";
+        b[0].style.top = "0px";
+
+        b[1].style.left = boxW - parseInt(b[1].style.width) + "px";
+        b[1].style.top = boxH/2 - parseInt(b[1].style.height)/2 + "px";
+
+        b[2].style.left = boxW/2 - parseInt(b[2].style.width)/2 + "px";
+        b[2].style.top = boxH - parseInt(b[2].style.height) - 10 + "px";
+
+        b[3].style.left = "10px";
+        b[3].style.top = boxH/2 - parseInt(b[3].style.height)/2 + "px";
+
+        s.style.left = boxW/2 - 10/2 + "px";
+    </script>
+</html>
