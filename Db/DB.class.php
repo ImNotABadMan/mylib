@@ -3,7 +3,7 @@
  * @Author: anchen
  * @Date:   2018-04-13 14:11:10
  * @Last Modified by:   anchen
- * @Last Modified time: 2018-04-14 13:59:57
+ * @Last Modified time: 2018-04-15 21:20:26
  */
 
 class DB{
@@ -73,7 +73,29 @@ class DB{
                     $str .= " $key = $val ";
                     break;
                 case is_array($val):
-                    $str .= " $key {$val[0]} '$val[1]' ";
+                    // [ 'id' => ['<', 123456] ]
+                    if( is_array($val) ){
+                        // [ 'id' => ['<', 123456] ]
+                        if( is_array($val[0]) ){
+                            // [ 'id' => ['<', 123456] ]
+                            // [ 'id' => [ ['>', 123456], ['<', 123459] ]
+                            foreach ($val as $k => $v) {
+                                $str .= " $key {$v[0]} '$v[1]' ";
+                                // echo $k . ' ' . (count($val) - 1) . "\n";
+                                if( $k != count($val) - 1 ){
+                                    if( isset($v[2]) ){
+                                        $str .= $v[2];
+                                    }else{
+                                        $str .= ' and ';
+                                    }
+                                }
+                            }
+                        }else{
+                            $str .= " $key {$val[0]} '$val[1]' ";
+                        }
+                    }else{
+                        $str .= " $key {$val[0]} '$val[1]' ";
+                    }
                     break;
                 default:
                     $str .= " $key = '$val' ";
