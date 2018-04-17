@@ -3,7 +3,7 @@
  * @Author: anchen
  * @Date:   2018-04-13 14:11:10
  * @Last Modified by:   anchen
- * @Last Modified time: 2018-04-15 21:20:26
+ * @Last Modified time: 2018-04-17 10:17:35
  */
 
 class DB{
@@ -36,7 +36,7 @@ class DB{
             $this->_type        = $config['type'];
             $this->_username    = $config['username'];
             $this->_pwd         = $config['pwd'];
-            $this->_dbname      = $config['dbame'];
+            $this->_dbname      = $config['dbname'];
             $this->_host        = $config['host'];
             $this->_char        = $config['char'];
             $this->_port        = $config['port'];
